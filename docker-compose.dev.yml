@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  
+  app:
+    build: .
+    ports:
+      - "2556:2556"
+    environment:
+      - DATABASE_URL=host=db port=5432 user=pre_test_assessment password=pS5h140Evri1 dbname=dev_assessment sslmode=disable
+      - PORT=:2565
+    networks:
+      - integration-test
+    
+  db:
+    image: postgres:15.0-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=pre_test_assessment
+      - POSTGRES_PASSWORD=pS5h140Evri1
+      - POSTGRES_DB=dev_assessment
+    ports:
+      - '5432:5432'
+    volumes: 
+      - ./db:/var/lib/postgresql/data
+    networks:
+      - integration-test
+      
+volumes:
+  db:
+    driver: local
+networks:
+  integration-test:

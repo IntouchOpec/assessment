@@ -1,0 +1,16 @@
+version:  3.8'
+
+
+services:
+
+  it_tests:
+    build:
+      context: .
+      dockerfile: ./dockerfile.test
+    environment:
+      - BASE_URL=http://app:2565
+    networks:
+      - integration-test
+
+networks:
+  integration-test:

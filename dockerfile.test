@@ -1,0 +1,7 @@
+
+FROM golang:1.18.9-alpine3.16
+
+WORKDIR /app
+COPY . .
+
+CMD CGO_ENABLED=0 go test ./expense/expense_test.go
